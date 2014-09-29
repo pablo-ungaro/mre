@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1022604129">
+    <data-source source="LOCAL" name="mre dev" uuid="6b250e17-1d7c-4ef5-b7b4-41ba4b2cda48">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://ec2-50-19-213-178.compute-1.amazonaws.com:3306/media_e62t</jdbc-url>
+      <user-name>media_e62t</user-name>
+      <user-password>df9edfcbdfc9df9adf9ddf9adfcfdf9cdfcedf92dfcfdfcbdf9edf92dfcedf9ddf93df92df9cdf9fdf9fdfc8df92df9edfccdf9adfcedfcbdfc9dfc8df9adf92</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
