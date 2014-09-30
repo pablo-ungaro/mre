@@ -48,4 +48,5 @@ class InsectController {
     def show( Inseto insect ){
         [insect:insect]
     }
+
 }

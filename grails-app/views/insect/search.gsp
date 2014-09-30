@@ -1,79 +1,54 @@
-<%@ page import="mre.Insect" %>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: jackson
+  Date: 29/09/14
+  Time: 22:59
+--%>
+
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <meta name="layout" content="main">
-    <g:set var="entityName" value="${message(code: 'insect.label', default: 'Insect')}"/>
-    <title><g:message code="default.show.label" args="[entityName]"/></title>
+    <meta name="layout" content="layout">
+    <asset:stylesheet src="style" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-
 <body>
-<a href="#show-insect" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                             default="Skip to content&hellip;"/></a>
-
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]"/></g:link></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label"
-                                                              args="[entityName]"/></g:link></li>
-    </ul>
-</div>
-
-<div id="show-insect" class="content scaffold-show" role="main">
-    <g:form action="search">
-        <g:textField name="q" value="${q}"/>
-
-        <g:select name="order" from="${orders}" value="${order}" onchange="this.form.submit()" noSelection="['':'-Ordem-']"/>
-
-        <g:select name="family" from="${families}" value="${family}" onchange="this.form.submit()" noSelection="['':'-Família-']"/>
-
-        <g:select name="subfamily" from="${subfamilies}" value="${subfamily}" onchange="this.form.submit()" noSelection="['':'-Subfamilia-']"/>
-
-    </g:form>
-</div>
-
-<div id="list-insect" class="content scaffold-list" role="main">
-    <h1><g:message code="default.list.label" args="[entityName]"/></h1>
-    <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
-    </g:if>
-    <table>
+<section class="content1">
+    <h1>Filtro</h1>
+    <section class="search">
+        <g:form class="form1" action="search">
+            <label>Busca</label>
+            <g:textField name="q" value="${q}"/>
+            <g:select name="order" from="${orders}" value="${order}" onchange="this.form.submit()" noSelection="['':'Ordem']"/>
+            <g:select name="family" from="${families}" value="${family}" onchange="this.form.submit()" noSelection="['':'Família']"/>
+            <g:select name="subfamily" from="${subfamilies}" value="${subfamily}" onchange="this.form.submit()" noSelection="['':'Subfamilia']"/>
+        </g:form>
+    </section>
+    <h1 class="no-border">Lista de Insetos</h1>
+    <table class="table1">
         <thead>
         <tr>
-
-            <g:sortableColumn property="name" title="Espécie"/>
-
+            <th>Espécie</th>
             <th>Ordem</th>
-
             <th>Família</th>
-
             <th>Subfamilia</th>
-
         </tr>
         </thead>
         <tbody>
         <g:each in="${insects}" status="i" var="insectInstance">
             <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
                 <td><g:link action="show"
-                            id="${insectInstance.id}">${insectInstance.species}</g:link></td>
-
+                            id="${insectInstance.id}">${insectInstance.species} <i class="fa fa-arrow-circle-right"></i></g:link></td>
                 <td>${insectInstance?.orderInsect}</td>
-
                 <td>${insectInstance?.family}</td>
-
                 <td>${insectInstance?.subfamily}</td>
-
             </tr>
         </g:each>
         </tbody>
     </table>
-
     <div class="pagination">
         <g:paginate total="${insectInstanceCount ?: 0}"/>
     </div>
-</div>
-
+</section>
 </body>
 </html>
