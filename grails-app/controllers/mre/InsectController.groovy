@@ -13,15 +13,15 @@ class InsectController {
         def result = [:]
 
         result << [q:params.q]
-        result << [orders:Inseto.list().orderInsect.unique()]
+        result << [orders:Inseto.list().orderInsect.unique().sort()]
 
         if(order) {
             result << [order:order]
-            result << [families:Inseto.where{orderInsect == order}.list().family.unique()]
+            result << [families:Inseto.where{orderInsect == order}.list().family.unique().sort()]
 
             if(family) {
                 result << [family:family]
-                result << [subfamilies: Inseto.where{family == family}.list().subfamily.unique()]
+                result << [subfamilies: Inseto.where{family == family}.list().subfamily.unique().sort()]
             }
 
             if(subfamily) result << [subfamily:subfamily]
@@ -37,7 +37,7 @@ class InsectController {
             if(params.order) orderInsect =~ "%$params.order%"
             if(params.family) family =~ "%$params.family%"
             if(params.subfamily) subfamily =~ "%$params.subfamily%"
-        }.list(offset: params.offset?:0,max: params.max)
+        }.list(offset: params.offset?:0,max: params.max,sort: 'species')
 
         result << [insectInstanceCount:Inseto.count()]
         result << [insects:insects]
@@ -45,11 +45,7 @@ class InsectController {
         return result
     }
 
-    def findAllFamilyByOrderInsect(){
-        render template: 'result-family',model: [families:OrderInsect.get(params.orderId).getFamilies()]
-    }
-
-    def findAllSubFamilyByFamily(){
-        render template: 'result-subfamily',model: [subfamilies:Family.get(params.familyId).getSubFamilies()]
+    def show( Inseto insect ){
+        [insect:insect]
     }
 }
