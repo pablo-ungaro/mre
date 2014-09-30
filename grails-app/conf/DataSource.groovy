@@ -23,7 +23,7 @@ environments {
             url = "jdbc:mysql://localhost:3306/mre"
             driverClassName = "com.mysql.jdbc.Driver"
             username = "root"
-            password = "admin"
+            password = "root"
         }
     }
     test {
