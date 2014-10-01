@@ -4,6 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   color: #333;
+  background: #222;
 }
 .page {
   header {
@@ -30,6 +31,23 @@ html, body {
     background: #222;
     width: 10%;
     float: left;
+    nav {
+      margin-top: 30px;
+      li {
+      list-style: none;
+        a {
+          color: #777;
+          font-size: 0.6em;
+          text-decoration: none;
+          display: block;
+          padding: 20px 15px;
+          &:hover {
+            background: #080808;
+            color: #FFF;
+          }
+        }
+      }
+    }
   }
   .content {
     float: left;

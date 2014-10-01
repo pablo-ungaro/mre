@@ -1,5 +1,7 @@
 .content1 {
   padding: 30px 20px;
+  background: #FFF;
+  min-height: 200px;
   h1 {
     padding: 0;
     margin: 0;
@@ -18,6 +20,18 @@
     color: #2a6496;
     text-decoration: underline;
     outline: 0;
+  }
+
+  .showMe{
+    ul {
+      padding: 0;
+      li {
+        list-style: none;
+        font-size: 0.6em;
+        font-weight: normal;
+        padding: 10px 0;
+      }
+    }
   }
 
 }
@@ -109,4 +123,9 @@
     padding: 10px;
     border-radius: 20px;
   }
+
+}
+.search-page a.link-search, .index-page a.link-index {
+  background: #080808;
+  color: #FFF ! important;
 }

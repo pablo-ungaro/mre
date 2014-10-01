@@ -12,16 +12,32 @@
     <asset:stylesheet src="application" />
     <g:layoutHead/>
 </head>
-<body>
-<section class="page">
+<body >
+<section class="page" id="page">
     <header>
         MRE Insetos
     </header>
-    <nav class="menu"></nav>
+    <nav class="menu">
+        <nav>
+            <li>
+                <g:link class="link-index" url="/mre"><i class="fa fa-fw fa-dashboard"> </i> Home</g:link>
+            </li>
+            <li>
+                <g:link class="link-search" controller="insect" action="search"><i class="fa fa-fw fa-file"> </i>Insetos</g:link></li>
+        </nav>
+    </nav>
     <section class="content">
         <g:layoutBody/>
     </section>
     <footer></footer>
 </section>
+<script>
+    var element = document.getElementById('content_search');
+    if (element) {
+        document.getElementById("page").className = "page search-page";
+    } else {
+        document.getElementById("page").className = "page index-page";
+    }
+</script>
 </body>
 </html>

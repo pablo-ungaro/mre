@@ -13,7 +13,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-<section class="content1">
+<section class="content1" id="content_search">
     <h1>Filtro</h1>
     <section class="search">
         <g:form class="form1" action="search">
