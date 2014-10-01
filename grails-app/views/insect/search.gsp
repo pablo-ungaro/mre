@@ -16,12 +16,12 @@
 <section class="content1" id="content_search">
     <h1>Filtro</h1>
     <section class="search">
-        <g:form class="form1" action="search">
+        <g:form class="form1" action="result">
             <label>Busca</label>
-            <g:textField name="q" value="${q}"/>
-            <g:select name="order" from="${orders}" value="${order}" onchange="this.form.submit()" noSelection="['':'Ordem']"/>
-            <g:select name="family" from="${families}" value="${family}" onchange="this.form.submit()" noSelection="['':'Família']"/>
-            <g:select name="subfamily" from="${subfamilies}" value="${subfamily}" onchange="this.form.submit()" noSelection="['':'Subfamilia']"/>
+            <g:textField name="q" value="${params.q}"/>
+            <g:select name="order" from="${orders}" value="${params.order}" onchange="this.form.submit()" noSelection="['':'Ordem']"/>
+            <g:select name="family" from="${families}" value="${params.family}" onchange="this.form.submit()" noSelection="['':'Família']"/>
+            <g:select name="subfamily" from="${subfamilies}" value="${params.subfamily}" onchange="this.form.submit()" noSelection="['':'Subfamilia']"/>
         </g:form>
     </section>
     <h1 class="no-border">Lista de Insetos</h1>
@@ -47,7 +47,7 @@
         </tbody>
     </table>
     <div class="pagination">
-        <g:paginate total="${insectInstanceCount ?: 0}"/>
+        <g:paginate total="${insectInstanceCount ?: 0}" params="${params}"/>
     </div>
 </section>
 </body>
