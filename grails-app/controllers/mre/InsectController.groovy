@@ -6,7 +6,6 @@ import grails.transaction.Transactional
 class InsectController {
 
     def search(Integer max){
-        params.max = Math.min(max ?: 10, 100)
         def order = params.order
         def family = params.family
         def subfamily = params.subfamily
@@ -27,26 +26,65 @@ class InsectController {
             if(subfamily) result << [subfamily:subfamily]
         }
 
-        def insects = Inseto.where{
-            if(params.q) {
-                orderInsect =~ "%$params.q%" ||
-                family =~ "%$params.q%" ||
-                subfamily =~ "%$params.q%" ||
-                species =~ "%$params.q%"
-            }
-            if(params.order) orderInsect =~ "%$params.order%"
-            if(params.family) family =~ "%$params.family%"
-            if(params.subfamily) subfamily =~ "%$params.subfamily%"
-        }.list(offset: params.offset?:0,max: params.max,sort: 'species')
-
-        result << [insectInstanceCount:Inseto.count()]
-        result << [insects:insects]
+        result << [insectInstanceCount:countByFilter(params)]
+        result << [insects:listByFilter(params)]
 
         return result
     }
 
+    def result(){
+        redirect action: 'search', params: params
+    }
+
     def show( Inseto insect ){
         [insect:insect]
+    }
+
+
+    private listByFilter( parameters, boolean count = false ) {
+
+        def insects = Inseto.createCriteria().list( createCriteriaByFilter( parameters, count ) )
+
+        return insects
+    }
+
+    private countByFilter( parameters ) {
+        return listByFilter( parameters, true ).first()
+    }
+
+    private createCriteriaByFilter( parameters, boolean count ) {
+        return {
+            or {
+                if (parameters?.q) {
+                    ilike("orderInsect", "%${parameters?.q}%")
+                    ilike("family", "%${parameters?.q}%")
+                    ilike("subfamily", "%${parameters?.q}%")
+                }
+            }
+
+            if (parameters?.order) {
+                ilike("orderInsect", "%${parameters?.order}%")
+            }
+
+            if (parameters?.family) {
+                ilike("family", "%${parameters.family}%")
+            }
+
+            if (parameters?.subfamily) {
+                ilike("subfamily", "%${parameters.subfamily}%")
+            }
+
+            order("species", "asc")
+
+            if (count) {
+                projections {
+                    rowCount()
+                }
+            }else{
+                maxResults((parameters.max?:10) as int)
+                firstResult((parameters.offset?:0) as int)
+            }
+        }
     }
 
 }
